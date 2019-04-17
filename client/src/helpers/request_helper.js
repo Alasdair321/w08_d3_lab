@@ -27,7 +27,14 @@ RequestHelper.prototype.post = function (payload) {
 };
 
 //UPDATE
-
+RequestHelper.prototype.put = function (id, payload) {
+  return fetch(`${this.url}/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(payload),
+    headers: { 'Content-Type': 'application/json' }
+  })
+    .then((response) => response.json());
+};
 //GET
 
 module.exports = RequestHelper;

@@ -17,6 +17,8 @@ BucketList.prototype.bindEvents = function(){
     this.editItem(evt.detail);
   });
   PubSub.subscribe('listView:completeitem', (evt)=>{
+    const id = evt.detail.id;
+    const payload = evt.detail.isComplete;
     this.completeItem(evt.detail);
   })
 };
@@ -45,9 +47,13 @@ BucketList.prototype.deleteItem = function (itemID) {
     .catch(console.error);
 };
 
-BucketList.prototype.getData = function(){
- // HERE IS A COMMENT
-};
+BucketList.prototype.completeItem = function(itemID, isComplete) {
+  this.request.put(itemID, isComplete)
+  .then((items)=>{
+    PubSub.publish('Bucketlist:list-data', items)
+  })
+  .catch(console.error);
+}
 
 module.exports = BucketList;
 
