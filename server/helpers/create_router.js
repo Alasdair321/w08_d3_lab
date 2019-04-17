@@ -14,6 +14,33 @@ const createRouter = function (collection){
         });
     });
 
+    // show(id)
+    router.get('/:id', (req, res)=>{
+        const id = req.params.id;
+        collection
+        .findOne({_id: ObjectID(id)})
+        // .toArray() WHY DOES THIS NOT NEED .toArray???
+        .then((docs)=>{res.json(docs)})
+        .catch((err)=>{
+            res.status(500);
+            res.json({status: 500, error: err});
+        });
+    })
+
+
+    // create
+
+
+
+    // delete(id)
+
+
+
+    // delete(all)
+
+
+
+    // update
     return router;
 };
 
