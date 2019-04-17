@@ -6,6 +6,7 @@ const createRouter = function (collection){
 
     // index
     router.get('/', (req, res)=>{
+        //ORGANIZE DATA BY COMPLETION AND THEN DATE
         collection.find().toArray()
         .then((docs)=>{res.json(docs)})
         .catch((err)=>{
