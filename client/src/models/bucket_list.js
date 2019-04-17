@@ -3,7 +3,7 @@ const PubSub = require('../helpers/pub_sub.js');
 
 const BucketList = function(url){
   this.url = url;
-  this.request = require new RequestHelper(this.url);
+  this.request = new RequestHelper(this.url);
 };
 
 BucketList.prototype.bindEvents = function(){
@@ -17,6 +17,8 @@ BucketList.prototype.bindEvents = function(){
     this.editItem(evt.detail);
   });
   PubSub.subscribe('listView:completeitem', (evt)=>{
+    const id = evt.detail.id;
+    const payload = evt.detail.isComplete;
     this.completeItem(evt.detail);
   })
 };
@@ -44,6 +46,14 @@ BucketList.prototype.deleteItem = function (itemID) {
     })
     .catch(console.error);
 };
+
+BucketList.prototype.completeItem = function(itemID, isComplete) {
+  this.request.put(itemID, isComplete)
+  .then((items)=>{
+    PubSub.publish('Bucketlist:list-data', items)
+  })
+  .catch(console.error);
+}
 
 module.exports = BucketList;
 
