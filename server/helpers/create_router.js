@@ -19,26 +19,38 @@ const createRouter = function (collection){
         const id = req.params.id;
         collection
         .findOne({_id: ObjectID(id)})
-        // .toArray() WHY DOES THIS NOT NEED .toArray???
         .then((docs)=>{res.json(docs)})
         .catch((err)=>{
             res.status(500);
             res.json({status: 500, error: err});
         });
-    })
-
+    });
 
     // create
-
+    router.post('/', (req, res)=>{
+        const newData = req.body;
+        collection.insertOne(newData)
+        .then(() => collection.find().toArray())
+        .then(docs => res.json(docs))
+        .catch((err)=>{
+            res.status(500);
+            res.json({status: 500, error: err});
+        });
+    });
 
 
     // delete(id)
-
-
-
-    // delete(all)
-
-
+    router.delete('/:id', (req, res) => {
+        const id = req.params.id;
+        collection
+        .deleteOne({_id: ObjectID(id)})
+        .then(() => collection.find().toArray())
+        .then(docs => res.json(docs))
+        .catch((err)=>{
+            res.status(500);
+            res.json({status: 500, error: err});
+        });
+    })
 
     // update
     return router;
