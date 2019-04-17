@@ -11,7 +11,7 @@ BucketList.prototype.bindEvents = function(){
 };
 
 BucketList.prototype.getData = function(){
-
+ // HERE IS A COMMENT
 };
 
 module.exports = BucketList;
