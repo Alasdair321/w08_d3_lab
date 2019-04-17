@@ -5,7 +5,7 @@ const FormView = function(element){
 };
 
 FormView.prototype.bindEvents = function(){
-
+  
 };
 
 SightingFormView.prototype.bindEvents = function () {
