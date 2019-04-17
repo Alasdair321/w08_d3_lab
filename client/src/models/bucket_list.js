@@ -16,7 +16,7 @@ BucketList.prototype.bindEvents = function(){
   PubSub.subscribe('ListView:edititem', (evt)=>{
     this.editItem(evt.detail);
   });
-  PubSub.subscribe('listView:completeitem', (evt)=>{
+  PubSub.subscribe('ListView:completeitem', (evt)=>{
     const id = evt.detail.id;
     const payload = evt.detail.isComplete;
     this.completeItem(evt.detail);
@@ -26,7 +26,7 @@ BucketList.prototype.bindEvents = function(){
 BucketList.prototype.getData = function () {
   this.request.get()
     .then((bucketlist) => {
-      PubSub.publish('Bucketlist:list-data', bucketlist);
+      PubSub.publish('BucketList:list-data', bucketlist);
     })
     .catch(console.error);
 };
@@ -34,7 +34,7 @@ BucketList.prototype.getData = function () {
 BucketList.prototype.postItem = function (item) {
   this.request.post(item)
     .then((items) => {
-      PubSub.publish('Bucketlist:list-data', items);
+      PubSub.publish('BucketList:list-data', items);
     })
     .catch(console.error);
 };
@@ -42,7 +42,7 @@ BucketList.prototype.postItem = function (item) {
 BucketList.prototype.deleteItem = function (itemID) {
   this.request.delete(itemID)
     .then((items) => {
-      PubSub.publish('Bucketlist:list-data', items);
+      PubSub.publish('BucketList:list-data', items);
     })
     .catch(console.error);
 };
@@ -50,7 +50,7 @@ BucketList.prototype.deleteItem = function (itemID) {
 BucketList.prototype.completeItem = function(itemID, isComplete) {
   this.request.put(itemID, isComplete)
   .then((items)=>{
-    PubSub.publish('Bucketlist:list-data', items)
+    PubSub.publish('BucketList:list-data', items)
   })
   .catch(console.error);
 }

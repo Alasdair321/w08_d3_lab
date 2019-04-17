@@ -25,7 +25,9 @@ ItemView.prototype.createEditButton = function (id) {
   const button = document.createElement('button');
   button.classList.add('ListView:delete-item');
   button.value = id;
-
+  button.innerHTML = `
+    <img src="images/edit.png" class="editbutton" alt="edit button">
+  `;
   button.addEventListener('click', (evt) => {
     PubSub.publish('ListView:edit-item', evt.target.value);
   });
@@ -37,7 +39,9 @@ ItemView.prototype.createDeleteButton = function (id) {
   const button = document.createElement('button');
   button.classList.add('delete-btn');
   button.value = id;
-
+  button.innerHTML = `
+    <img src="images/delete.png" class="editbutton" alt="delete button">
+  `;
   button.addEventListener('click', (evt) => {
     PubSub.publish('SightingView:sighting-delete-clicked', evt.target.value);
   });
