@@ -7,8 +7,6 @@ const BucketList = function(url){
 };
 
 BucketList.prototype.bindEvents = function(){
-  console.log("bucketlist bindEvents");
-
   PubSub.subscribe('FormView:Submitted', (evt)=>{
     this.postItem(evt.detail); // create
   });
@@ -19,11 +17,13 @@ BucketList.prototype.bindEvents = function(){
     this.editItem(evt.detail);
   });
   PubSub.subscribe('listView:completeitem', (evt)=>{
+    const id = evt.detail.id;
+    const payload = evt.detail.isComplete;
     this.completeItem(evt.detail);
   })
 };
 
-BucketList.prototype.getData = function(){
+BucketList.prototype.getData = function () {
   this.request.get()
     .then((bucketlist) => {
       PubSub.publish('Bucketlist:list-data', bucketlist);
@@ -47,41 +47,12 @@ BucketList.prototype.deleteItem = function (itemID) {
     .catch(console.error);
 };
 
+BucketList.prototype.completeItem = function(itemID, isComplete) {
+  this.request.put(itemID, isComplete)
+  .then((items)=>{
+    PubSub.publish('Bucketlist:list-data', items)
+  })
+  .catch(console.error);
+}
+
 module.exports = BucketList;
-
-
-// Sightings.prototype.bindEvents = function () {
-//   PubSub.subscribe('SightingView:sighting-delete-clicked', (evt) => {
-//     this.deleteSighting(evt.detail);
-//   });
-
-//   PubSub.subscribe('SightingFormView:sighting-submitted', (evt) => {
-//     this.postSighting(evt.detail);
-//   })
-// };
-
-// Sightings.prototype.getData = function () {
-//   this.request.get()
-//     .then((sightings) => {
-//       PubSub.publish('Sightings:data-loaded', sightings);
-//     })
-//     .catch(console.error);
-// };
-
-// Sightings.prototype.postSighting = function (sighting) {
-//   this.request.post(sighting)
-//     .then((sightings) => {
-//       PubSub.publish('Sightings:data-loaded', sightings);
-//     })
-//     .catch(console.error);
-// };
-
-// Sightings.prototype.deleteSighting = function (sightingId) {
-//   this.request.delete(sightingId)
-//     .then((sightings) => {
-//       PubSub.publish('Sightings:data-loaded', sightings);
-//     })
-//     .catch(console.error);
-// };
-
-// module.exports = Sightings;
