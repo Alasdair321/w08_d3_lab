@@ -7,7 +7,7 @@ const ItemView = function(element){
 ItemView.prototype.render = function (item) {
   const itemContainer = document.createElement('div');
   itemContainer.innerHTML = `
-    <img src="${item.image}" alt="${item.title} image">
+    <img class="bucket-image" src="${item.image}" alt="${item.title} image">
     <h2>${item.title}</h2>
     <p>${item.deadline}</p>
   `;

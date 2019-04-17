@@ -1,1 +1,55 @@
-/* PLACEHOLDER */
+```body {
+    background-color: lightgrey;
+  }
+  
+  h1 {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
+    font-size: 3em;
+  }
+  
+  h2 {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
+    font-size: 1.2em;
+  }
+  
+  p {
+    font-family: 'Karla', sans-serif;
+    font-size: 1em;
+  }
+  
+  #bucket-list {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #bucket-list div {
+    background-color: white;
+    height: 800px;
+    width: 400px;
+    border: white 2px solid;
+    margin: 1em;
+  }
+  
+  .bucket-image {
+    width: 400px;
+    height: 400px;
+    object-fit: fill;
+  }
+  
+  .editbutton {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .editbutton {
+  
+  }```
+  Message Input
+  
+  
+  Message Eric

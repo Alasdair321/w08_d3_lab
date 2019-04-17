@@ -10,13 +10,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const listView = new ListView(listElement);
   listView.bindEvents();
 
-  const buttonElement = document.querySelector('#new-button');
-  const buttonView = new ButtonView(buttonElement);
-  buttonView.bindEvents();
-
   const formElement = document.querySelector('#bucket-form');
   const formView = new FormView(formElement);
   formView.bindEvents();
+
+  const buttonElement = document.querySelector('#new-button');
+  const buttonView = new ButtonView(buttonElement);
+  buttonView.bindEvents();
 
   const url = "http://localhost:3000/api/items";
   const bucketList = new BucketList(url);

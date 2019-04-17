@@ -4,31 +4,43 @@ const FormView = function(element){
   this.element = element;
 };
 
-FormView.prototype.bindEvents = function(){
-  
-};
-
-SightingFormView.prototype.bindEvents = function () {
-  this.form.addEventListener('submit', (evt) => {
+FormView.prototype.bindEvents = function () {
+  this.element.addEventListener('submit', (evt) => {
     this.handleSubmit(evt);
   });
 };
 
-SightingFormView.prototype.handleSubmit = function (evt) {
+FormView.prototype.handleSubmit = function (evt) {
   evt.preventDefault();
-  const newSighting = this.createSighting(evt.target);
-  PubSub.publish('SightingFormView:sighting-submitted', newSighting);
+  const newBucketList = this.createItem(evt.target);
+  PubSub.publish('FormView:Submitted', newBucketList);
   evt.target.reset();
 };
 
-SightingFormView.prototype.createSighting = function (form) {
-  const newSighting = {
-    species: form.species.value,
-    location: form.location.value,
-    date: form.date.value
+FormView.prototype.createItem = function (form) {
+  const newBucketList = {
+    title: form.title.value,
+    deadline: form.deadline.value,
+    completed: form.completed.value,
+    img: form.img.value
   };
 
-  return newSighting;
+  return newBucketList;
 };
+
+FormView.prototype.renderForm = function () {
+  this.element.innerHTML = `
+  <label for="title">Bucketlist Item</label>
+<input type="text" name="title" id="title">
+<label for="deadline">Deadline</label>
+<input type="date" name="deadline" id="deadline">
+<input type="hidden" name="completed" id="completed" value="false">
+<label for="img">Image URL</label>
+<input type="text" name="img" id="img">
+<input type="submit" value="save" id="save">
+  `
+};
+
+
 
 module.exports = FormView;
