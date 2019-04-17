@@ -1,6 +1,5 @@
 const PubSub = require('../helpers/pub_sub.js');
-const ListView = require('../views/item_view.js');
-
+const ItemView = require('../views/item_view.js');
 
 const ListView = function(element){
   this.element = element;
@@ -16,7 +15,7 @@ ListView.prototype.bindEvents = function(){
 
 ListView.prototype.render = function (items) {
   this.element.innerHTML = '';
-  const itemView = new ItemView(this.container);
+  const itemView = new ItemView(this.element);
   items.forEach( (item) => itemView.render(item) );
 };
 
