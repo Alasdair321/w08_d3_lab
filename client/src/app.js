@@ -4,6 +4,7 @@ const FormView = require('./views/form_view.js');
 const BucketList = require('./models/bucket_list.js');
 
 document.addEventListener('DOMContentLoaded', ()=>{
+  console.log('this happened')
 
   const listElement = document.querySelector('#bucket-list');
   const listView = new ListView(listElement);
@@ -20,5 +21,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const url = "http://localhost:3000/api/items";
   const bucketList = new BucketList(url);
   bucketList.bindEvents();
+
   bucketList.getData();
 });

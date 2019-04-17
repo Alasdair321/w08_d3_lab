@@ -5,7 +5,7 @@ const FormView = function(element){
 };
 
 FormView.prototype.bindEvents = function(){
-
+  
 };
 
 module.exports = FormView;

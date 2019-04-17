@@ -7,6 +7,8 @@ const BucketList = function(url){
 };
 
 BucketList.prototype.bindEvents = function(){
+  console.log("bucketlist bindEvents");
+
   PubSub.subscribe('FormView:Submitted', (evt)=>{
     this.postItem(evt.detail); // create
   });
@@ -21,7 +23,7 @@ BucketList.prototype.bindEvents = function(){
   })
 };
 
-BucketList.prototype.getData = function () {
+BucketList.prototype.getData = function(){
   this.request.get()
     .then((bucketlist) => {
       PubSub.publish('Bucketlist:list-data', bucketlist);
@@ -43,10 +45,6 @@ BucketList.prototype.deleteItem = function (itemID) {
       PubSub.publish('Bucketlist:list-data', items);
     })
     .catch(console.error);
-};
-
-BucketList.prototype.getData = function(){
- // HERE IS A COMMENT
 };
 
 module.exports = BucketList;
