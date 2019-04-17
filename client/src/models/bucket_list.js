@@ -10,4 +10,8 @@ BucketList.prototype.bindEvents = function(){
 
 };
 
+BucketList.prototype.getData = function(){
+
+};
+
 module.exports = BucketList;
