@@ -1,7 +1,7 @@
 const ButtonView = require('./views/button_view.js');
 const ListView = require('./views/list_view.js');
 const FormView = require('./views/form_view.js');
-const BucketList = require('./models/bucket');
+const BucketList = require('./models/bucket_list.js');
 
 document.addEventListener('DOMContentLoaded', ()=>{
 
